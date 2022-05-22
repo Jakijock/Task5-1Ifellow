@@ -1,4 +1,4 @@
-package regresIn.Specifications;
+package regresIn.specifications;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;

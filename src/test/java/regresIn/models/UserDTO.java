@@ -1,4 +1,4 @@
-package regresIn.Models;
+package regresIn.models;
 
 public class UserDTO {
 

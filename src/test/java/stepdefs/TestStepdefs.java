@@ -6,15 +6,15 @@ import io.restassured.RestAssured;
 import org.apache.hc.core5.http.HttpStatus;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
-import regresIn.Models.Registr;
-import regresIn.Models.Successful;
-import regresIn.Models.UserDTO;
-import regresIn.Specifications.Specifications;
+import regresIn.models.Registr;
+import regresIn.models.Successful;
+import regresIn.models.UserDTO;
+import regresIn.specifications.Specifications;
 
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
-import static regresIn.Specifications.Specifications.requestSpecification;
+import static regresIn.specifications.Specifications.requestSpecification;
 
 public class TestStepdefs {
 
@@ -34,6 +34,7 @@ public class TestStepdefs {
         Assert.assertEquals(arg.get(1), successful.getJob());
     }
 
+
     @Тогда("проверяем, что ответ имеет валидные значения")
     public void checkingValidResponseValues() {
         Specifications.installSpec(requestSpecification(URL), Specifications.responseSpecification200(201));
@@ -47,5 +48,19 @@ public class TestStepdefs {
                 .body("name", Matchers.is("Tomato"))
                 .body("job", Matchers.is("Eat market"));
     }
+
+    @Когда("открыт сайт")
+    public void openURL() {
+        Specifications.installSpec(requestSpecification(URL), Specifications.responseSpecification200(200));
+    }
+
+    @Тогда("появляется статус код {int}")
+    public void checkStatusCod(int statusCode) {
+        RestAssured.given()
+                .get("/api/users/2")
+                .then()
+                .statusCode(statusCode);
+    }
 }
+
 
